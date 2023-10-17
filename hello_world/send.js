@@ -9,7 +9,10 @@ const sendMessages = async (mesage) =>{
     await channel.assertQueue(queueName )
     await channel.sendToQueue(queueName, Buffer.from(msg))
     console.log(" [x] Sent %s", msg)
-    await channel.close()
+    setTimeout(async()=>{
+        await channel.close()
+        process.exit(100)
+    })
     console.log("Channel is closed")
 }
 sendMessages()

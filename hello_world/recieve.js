@@ -11,6 +11,7 @@ const recieveMessage = async () =>{
         console.log(" [x] Received %s", msg.content.toString())
     } , { noAck: true })
     console.log('Message is recieved')
+    process.exit(100)
    
 }
 
