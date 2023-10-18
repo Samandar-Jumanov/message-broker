@@ -1,8 +1,9 @@
 const amqplib = require('amqplib');
 
 const topicName = 'topicName';
+const routingKey = process.argv[2]; // Read the routing key from command line arguments
 
-const consumeTopicMessage = async (routingKey) => {
+const consumeTopicMessage = async () => {
   const connection = await amqplib.connect('amqp://localhost');
   const channel = await connection.createChannel();
   await channel.assertExchange(topicName, 'topic');
@@ -15,16 +16,7 @@ const consumeTopicMessage = async (routingKey) => {
   }, { noAck: false });
 };
 
-const routingKey = process.argv[2]; // Read the routing key from command line arguments
+consumeTopicMessage()
 
-if (!routingKey) {
-  console.error('Please provide a routing key');
-  process.exit(1);
-}
 
-consumeTopicMessage(routingKey)
-  .catch((error) => {
-    console.error('An error occurred:', error);
-    process.exit(1);
-  });
-  
+
