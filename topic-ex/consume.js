@@ -13,7 +13,7 @@ const consumeTopicMessage = async () => {
   channel.consume(queue.queue, (msg) => {
     console.log(' [x] Received %s', msg.content.toString());
     channel.ack(msg);
-  }, { noAck: false });
+  }, { noAck: false }); 
 };
 
 consumeTopicMessage()
